@@ -37,54 +37,20 @@ def create_testing_data(directory, X, y, catego, size):
 
 X_test1=[]
 y_test1=[]
-X_test1thick=[]
-y_test1thick=[]
-X_test2=[]
-y_test2=[]
-X_test2thick=[]
-y_test2thick=[]
-X_test3=[]
-y_test3=[]
-X_test3thick=[]
-y_test3thick=[]
 create_testing_data("Photos/1/", X_test1, y_test1, CATEGORIES, IMG_SIZE)
 create_testing_data("Photos/1_thicker/", X_test1thick, y_test1thick, CATEGORIES, IMG_SIZE)
-create_testing_data("Photos/2/", X_test2, y_test2, CATEGORIES, IMG_SIZE)
-create_testing_data("Photos/2_thicker/", X_test2thick, y_test2thick, CATEGORIES, IMG_SIZE)
-create_testing_data("Photos/3/", X_test3, y_test3, CATEGORIES, IMG_SIZE)
-create_testing_data("Photos/3_thicker/", X_test3thick, y_test3thick, CATEGORIES, IMG_SIZE)
 print(len(X_test1))
 print(len(y_test1))
-print(len(X_test1thick))
-print(len(y_test1thick))
-print(len(X_test2))
-print(len(y_test2))
-print(len(X_test2thick))
-print(len(y_test2thick))
-print(len(X_test3))
-print(len(y_test3))
-print(len(X_test3thick))
-print(len(y_test3thick))
 print("Loaded datasets")
 
 # Reshaping to format which CNN expects (batch, height, width, channels)
 X_test = X_test.reshape(-1, IMG_SIZE, IMG_SIZE, 1).astype('float32')
 X_test1 = np.array(X_test1).reshape(-1, IMG_SIZE, IMG_SIZE, 1).astype('float32')
-X_test1thick = np.array(X_test1thick).reshape(-1, IMG_SIZE, IMG_SIZE, 1).astype('float32')
-X_test2 = np.array(X_test2).reshape(-1, IMG_SIZE, IMG_SIZE, 1).astype('float32')
-X_test2thick = np.array(X_test2thick).reshape(-1, IMG_SIZE, IMG_SIZE, 1).astype('float32')
-X_test3 = np.array(X_test3).reshape(-1, IMG_SIZE, IMG_SIZE, 1).astype('float32')
-X_test3thick = np.array(X_test3thick).reshape(-1, IMG_SIZE, IMG_SIZE, 1).astype('float32')
 print("Reshaped datasets")
 
 # normalize inputs from 0-255 to 0-1
 X_test = X_test / 255.0
 X_test1 = X_test1 / 255.0
-X_test1thick = X_test1thick / 255.0
-X_test2 = X_test2 / 255.0
-X_test2thick = X_test2thick / 255.0
-X_test3 = X_test3 / 255.0
-X_test3thick = X_test3thick / 255.0
 print("Normalized datasets")
 
 # one hot encode
@@ -92,11 +58,6 @@ number_of_classes = 26
 y_test = y_test - 1
 y_test = np_utils.to_categorical(y_test, number_of_classes)
 y_test1 = np_utils.to_categorical(np.array(y_test1), number_of_classes)
-y_test1thick = np_utils.to_categorical(np.array(y_test1thick), number_of_classes)
-y_test2 = np_utils.to_categorical(np.array(y_test2), number_of_classes)
-y_test2thick = np_utils.to_categorical(np.array(y_test2thick), number_of_classes)
-y_test3 = np_utils.to_categorical(np.array(y_test3), number_of_classes)
-y_test3thick = np_utils.to_categorical(np.array(y_test3thick), number_of_classes)
 print("Normalized labels")
 
 #loading the model
@@ -128,11 +89,4 @@ def create_excelfiles_probabilities(X, y, name, catego, mod):
 
 create_excelfiles_probabilities(X_test, y_test, 'test', CATEGORIES, model)
 create_excelfiles_probabilities(X_test1, y_test1, '1', CATEGORIES, model)
-create_excelfiles_probabilities(X_test1thick, y_test1thick, '1thick', CATEGORIES, model)
-create_excelfiles_probabilities(X_test2, y_test2, '2', CATEGORIES, model)
-create_excelfiles_probabilities(X_test2thick, y_test2thick, '2thick', CATEGORIES, model)
-create_excelfiles_probabilities(X_test3, y_test3, '3', CATEGORIES, model)
-create_excelfiles_probabilities(X_test3thick, y_test3thick, '3thick', CATEGORIES, model)
-
-
 
